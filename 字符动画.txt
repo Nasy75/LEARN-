@@ -1,1 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "WINMM.LIB")
+#include<string.h>
+#include<time.h>
+int main()
+{
+	void recursur();
+	int i = 0, caf =150;
+	FILE *fp ;
+	clock_t stime = 0, ftime = 0;
+	char buf[5000], seat[]="C:\\Users\\dell\\Desktop\\字符动画2.0\\字符动画2.0\\(00).txt.txt", ai[1];	
+	printf("-----字符动画-----\nPress Enter to play.\n");
+	getchar();
+	system("cls");
+	stime = clock();
+	while(i <= 26)
+	{		
+	    if(i % 13 == 0)
+		{
+			caf = 250;
+		}
+		else
+		{
+			caf = 150;
+		}
+		strcpy(seat,"C:\\Users\\dell\\Desktop\\字符动画2.0\\字符动画2.0\\(");
+		sprintf(ai, "%d", i);
+		strcat(seat, ai);
+		strcat(seat,").txt.txt");
+		ftime = clock();	
+		if((ftime - stime) >=caf )
+		{
+			i++;
+			fp=fopen (seat,"r");
+			fread(buf, sizeof(buf), 1,fp);
+			buf[5000] ='\0';
+			fclose(fp);
+			fprintf(stdout,"%s",buf);
+			fprintf(stdout,"Frame:%d",i);
+			stime += caf;
+			recursur();	
+		}
+	}
+	Sleep(300);
+	system("cls");
+	printf("-----字符动画-----\nThanks for watching!\nMade by chuan.\n\n");
+	printf("Press Enter to Exit.\n");
+	getchar();
+	getchar();
+	return 0;
+}
+void recursur()
+{
+	HANDLE hout;	
+	COORD coord;	
+	coord.X = 0;	
+	coord.Y = 0;	
+	hout = GetStdHandle(STD_OUTPUT_HANDLE);	
+	SetConsoleCursorPosition(hout,coord);
+}
 
