@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <math.h>
+#include <iostream>
+#include <conio.h>
+
+int main()
+{
+    start:int i,y,y1,y2,m1,m2,d1,d2,count=0,choose;
+	printf("-----------------人体生物节律查询---------------------\n");
+	int sum1=0,sum2=0,sum;
+	int z1,z2,z3;
+	char ch;	
+	printf("请输入你的出生年月日（例如1980 2 14）：");
+	scanf("%d %d %d",&y1,&m1,&d1);
+	printf("请输入测定年月日（例如2020 5 8）：");
+	scanf("%d %d %d",&y2,&m2,&d2);
+	y=y2-y1;
+	switch(m1)
+    {
+     case 1:sum1=0;break;
+	 case 2:sum1=31;break;
+     case 3:sum1=59;break;
+	 case 4:sum1=90;break;
+	 case 5:sum1=120;break;
+	 case 6:sum1=151;break;
+	 case 7:sum1=181;break;
+	 case 8:sum1=212;break;
+	 case 9:sum1=243;break;
+	 case 10:sum1=273;break;
+	 case 11:sum1=304;break;
+	 case 12:sum1=334;break;
+	 default:printf("data error");break;
+    }
+     sum1=sum1+d1;
+     if((y1%400==0||(y1%4==0&&y1%100!=0))&&m1>2)
+        sum1++;
+	 switch(m2)
+    {
+     case 1:sum2=0;break;
+	 case 2:sum2=31;break;
+     case 3:sum2=59;break;
+	 case 4:sum2=90;break;
+	 case 5:sum2=120;break;
+	 case 6:sum2=151;break;
+	 case 7:sum2=181;break;
+	 case 8:sum2=212;break;
+	 case 9:sum2=243;break;
+	 case 10:sum2=273;break;
+	 case 11:sum2=304;break;
+	 case 12:sum2=334;break;
+	 default:printf("data error");break;
+    }
+     sum2=sum2+d2;
+     if((y2%400==0||(y2%4==0&&y2%100!=0))&&m2>2)
+      sum2++;
+	 for(i=y1;i<=y2;i++)
+	 {
+		if((i%4==0&&i%100!=0)||(i%400==0))
+		{
+		    count++;
+		}
+	}sum=y*365+count-sum1+sum2;
+	 z1=sum%23;    //求余，y1为体力节律，y2为情绪节律，y3为智力节律 
+     z2=sum%28;
+     z3=sum%33;
+	if(z1==0)      //判断体力所处时期 
+    printf("体力刚好为周期日\n");
+    if(z1>=1&&z1<12)
+    printf("体力处在高潮期第%d天\n",z1);
+    if(z1==12)
+    printf("体力刚好处在临界日\n");
+    if(z1>12)
+    printf("体力处在低潮期第%d天\n",z1-12);
+    
+	if(z2==0)      //判断情绪所处时期 
+    printf("情绪刚好为周期日\n");
+    if(z2>=1&&z2<14)
+    printf("情绪处在高潮期第%d天\n",z2);
+    if(z2==14)
+    printf("情绪刚好处在临界日\n");
+    if(z2>14)
+    printf("情绪处在低潮期第%d天\n",z2-14);
+    
+	if(z3==0)      //判断智力所处时期 
+    printf("智力刚好为周期日\n");
+    if(z3>=1&&z3<17)
+    printf("智力处在高潮期第%d天\n",z3);
+    if(z3==17)
+    printf("智力刚好处在临界日\n");
+    if(z3>17)
+    printf("智力处在低潮期第%d天\n",z3-17);
+	printf("是否还要再次查询？输入Y继续，输入其他退出。\n");
+	choose=getch();
+	if(choose=='Y')goto start;
+	
+	system("pause");
+	return 0;
+}
